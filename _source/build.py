@@ -104,6 +104,7 @@ def head(title, desc, path, depth, og_img=None, extra_head=""):
 <link rel="icon" href="{LOGO_FAVICON}">
 <link rel="apple-touch-icon" href="{LOGO_FAVICON}">
 {pre}
+<script>(function(d){{if(!window.matchMedia||matchMedia("(prefers-reduced-motion: reduce)").matches||!("IntersectionObserver" in window))return;d.classList.add("motion");setTimeout(function(){{if(!window.__vyMotion)d.classList.remove("motion")}},2500)}})(document.documentElement)</script>
 <link rel="stylesheet" href="{p}assets/css/site.css?v={ASSET_V}">
 {extra_head}</head>
 <body>

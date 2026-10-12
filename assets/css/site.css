@@ -715,3 +715,38 @@ button { font: inherit; color: inherit; }
   .hero__copy { align-self: start; }
   .hero__foot { display: none; }
 }
+
+/* ---------- motion: page-load entrances and scroll reveals.
+   Only active when JS adds .motion to <html> (never for reduced-motion users). */
+:root { --ease-out: cubic-bezier(.16, 1, .3, 1); }
+@keyframes rise { from { opacity: 0; transform: translate3d(0, 22px, 0); } to { opacity: 1; transform: none; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes settle { from { transform: scale(1.08); } to { transform: none; } }
+
+.motion .hero__copy > *, .motion .ph__copy > * { animation: rise .9s var(--ease-out) both; }
+.motion .hero__copy > :nth-child(2), .motion .ph__copy > :nth-child(2) { animation-delay: .08s; }
+.motion .hero__copy > :nth-child(3), .motion .ph__copy > :nth-child(3) { animation-delay: .16s; }
+.motion .hero__copy > :nth-child(4), .motion .ph__copy > :nth-child(4) { animation-delay: .24s; }
+.motion .hero__copy > :nth-child(n+5), .motion .ph__copy > :nth-child(n+5) { animation-delay: .32s; }
+.motion .hero__foot { animation: fade 1s .45s ease both; }
+.motion .hero__media video { animation: settle 2.4s var(--ease-out) both; }
+.motion .ph__media { animation: rise 1s .15s var(--ease-out) both; }
+.motion .ph__media.media > img { animation: settle 1.8s var(--ease-out) both; }
+
+.motion :is(.sh, .cards > li, .article__main > .block, .aside .book, .tgroup, .facility, .bio, .clinic,
+  .posts > li, .photos > *, .mission > *, .team > li, .lead-card, .team-strip, .rv__intro, .rv__feature,
+  .rv__photo, .rv__more, .tx__side, .tx__group, .wgrid > li, .ba-grid > .ba-card, .band__copy, .band > .media,
+  .photo-pair > *, .facts li, .form, .prose, .post-cover, .stack-lg > *, .lost):not(.is-done) {
+  transition: opacity .8s ease, transform .9s var(--ease-out);
+}
+.motion :is(.sh, .cards > li, .article__main > .block, .aside .book, .tgroup, .facility, .bio, .clinic,
+  .posts > li, .photos > *, .mission > *, .team > li, .lead-card, .team-strip, .rv__intro, .rv__feature,
+  .rv__photo, .rv__more, .tx__side, .tx__group, .wgrid > li, .ba-grid > .ba-card, .band__copy, .band > .media,
+  .photo-pair > *, .facts li, .form, .prose, .post-cover, .stack-lg > *, .lost):not(.in-view) {
+  opacity: 0; transform: translate3d(0, 28px, 0);
+}
+/* photos ease in from a slight zoom as their block arrives */
+.motion :is(.band > .media, .rv__photo, .photo-pair > *, .photos > *, .post-cover, .wgrid__photo, .posts > li, .facility, .cards > li):not(.is-done) .media > img,
+.motion :is(.band > .media, .rv__photo, .post-cover, .photos > .media) > img { transition: transform 1.6s var(--ease-out); }
+.motion :is(.band > .media, .rv__photo, .photo-pair > *, .photos > *, .post-cover, .wgrid__photo, .posts > li, .facility, .cards > li):not(.in-view) .media > img,
+.motion :is(.band > .media, .rv__photo, .post-cover, .photos > .media):not(.in-view) > img { transform: scale(1.08); }

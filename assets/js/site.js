@@ -192,6 +192,56 @@
     });
   }
 
+  /* ---------- scroll reveals: blocks rise into place as they enter the screen.
+     The matching CSS only hides them while <html> has .motion (set in <head>). */
+  var root = document.documentElement;
+  if (root.classList.contains("motion")) {
+    window.__vyMotion = true;
+    var REVEAL = ".sh, .cards > li, .article__main > .block, .aside .book, .tgroup, .facility, .bio, .clinic, .posts > li, .photos > *, .mission > *, .team > li, .lead-card, .team-strip, .rv__intro, .rv__feature, .rv__photo, .rv__more, .tx__side, .tx__group, .wgrid > li, .ba-grid > .ba-card, .band__copy, .band > .media, .photo-pair > *, .facts li, .form, .prose, .post-cover, .stack-lg > *, .lost";
+    var finish = function (el) {
+      setTimeout(function () { el.classList.add("is-done"); el.style.transitionDelay = ""; }, 1700 + (parseFloat(el.style.transitionDelay) || 0) * 1000);
+    };
+    var show = function (el, delay) {
+      if (delay) el.style.transitionDelay = delay + "s";
+      el.classList.add("in-view");
+      finish(el);
+    };
+    var rio = new IntersectionObserver(function (entries) {
+      var n = 0;
+      entries.filter(function (e) { return e.isIntersecting; })
+        .sort(function (a, b) { return a.boundingClientRect.top - b.boundingClientRect.top || a.boundingClientRect.left - b.boundingClientRect.left; })
+        .forEach(function (e) { show(e.target, Math.min(n++, 5) * 0.08); rio.unobserve(e.target); });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    document.querySelectorAll(REVEAL).forEach(function (el) {
+      if (el.parentElement.closest(REVEAL)) { el.classList.add("in-view", "is-done"); return; }
+      rio.observe(el);
+    });
+    /* anything hidden by a filter (smile gallery) or jumped past by an anchor link still shows */
+    window.addEventListener("hashchange", function () {
+      document.querySelectorAll(REVEAL).forEach(function (el) { if (!el.classList.contains("in-view") && el.getBoundingClientRect().top < innerHeight) show(el, 0); });
+    });
+
+    /* count the hospital facts up once (years stay as they are) */
+    var fio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        fio.unobserve(e.target);
+        var b = e.target, txt = b.textContent, end = parseInt(txt.replace(/,/g, ""), 10), t0 = null;
+        var tick = function (t) {
+          t0 = t0 || t;
+          var k = Math.min((t - t0) / 1400, 1), v = Math.round(end * (1 - Math.pow(1 - k, 3)));
+          b.textContent = k < 1 ? v.toLocaleString("en-IN") : txt;
+          if (k < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.6 });
+    document.querySelectorAll(".facts b").forEach(function (b) {
+      var s = b.textContent.trim();
+      if (/^[\d,]+$/.test(s) && !/^(19|20)\d\d$/.test(s) && parseInt(s.replace(/,/g, ""), 10) > 3) fio.observe(b);
+    });
+  }
+
   /* ---------- footer year */
   var y = document.getElementById("year");
   if (y) y.textContent = String(new Date().getFullYear());
