@@ -678,7 +678,9 @@ if __name__ == "__main__":
     shutil.copytree("static", os.path.join(OUT, "assets"))
     for f in os.listdir("extra"): shutil.copy(os.path.join("extra", f), OUT)
     os.makedirs(os.path.join(OUT, "_source"), exist_ok=True)
-    for f in ("build.py", "content.py", "icons.py", "meta.json", "process_doctors.py"): shutil.copy(f, os.path.join(OUT, "_source"))
+    for f in ("build.py", "content.py", "icons.py", "meta.json", "qa.py", "mshot.py", "serve.sh", "scrape_veeyes.py"):
+        if os.path.exists(f): shutil.copy(f, os.path.join(OUT, "_source"))
+    for d in ("static", "extra"): shutil.copytree(d, os.path.join(OUT, "_source", d))
     home(); treatments_page(); about(); smile_gallery(); hospital(); blog(); contact(); appointment(); notfound(); redirects(); sitemap()
     for x in T: treatment(x)
     n = sum(len(f) for _, _, f in os.walk(OUT))

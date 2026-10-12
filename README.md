@@ -39,7 +39,9 @@ There is no server, so the booking form opens WhatsApp with the patient's detail
 Links from treatment pages fill in the treatment automatically (for example, appointment.html?t=teeth-alignment). Adding `&c=tiruppur` selects the Tiruppur hospital. On phones, a bottom bar offers Call (choose the hospital), WhatsApp and Book.
 
 ## Editing content
-All text lives in `_source/content.py`; the icon set is in `_source/icons.py` (each icon is a small SVG drawing, easy to recolour or swap). Edit it, then run `python build.py` from the `_source` folder to regenerate the pages. The build expects the `static/` and `extra/` folders next to it, as in the original project.
+All text lives in `_source/content.py`; the icon set is in `_source/icons.py` (each icon is a small SVG drawing, easy to recolour or swap). Edit it, then run `python build.py` inside `_source`. It writes the finished site to `_source/site/`; copy that folder's contents over the top-level files.
+
+`_source` holds the complete project: `static/` (stylesheet, script, fonts, logo), `extra/` (hosting files and this README), `qa.py` and `mshot.py` (layout checks with Playwright) and `scrape_veeyes.py` (the scraper used to collect the old site's content).
 
 ## Stock video (free for commercial use, no attribution needed)
 - Hero: Pexels 7803018 (young girl smiling in the dental chair)
