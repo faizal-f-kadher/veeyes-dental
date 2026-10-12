@@ -1,0 +1,12 @@
+/copy-of-inflation-facility-1  /invisalign  301
+/copy-of-ot  /clinic-gallery  301
+/copy-of-surgical-icu  /clinic-gallery  301
+/copy-of-inflation-facility  /clinic-gallery  301
+/copy-of-digital-radiography  /clinic-gallery  301
+/copy-of-services  /treatments  301
+/events-page  /  301
+/services  /treatments  301
+/gallery  /smile-gallery  301
+/book-online  /appointment  301
+/service-page/*  /treatments  301
+/booking-calendar/*  /appointment  301

@@ -1,0 +1,32 @@
+# Apache / cPanel hosting
+Options -MultiViews
+ErrorDocument 404 /404.html
+RewriteEngine On
+# serve /about from about.html, and send /about.html to /about
+RewriteCond %{THE_REQUEST} \s/([^.?\s]+)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+# old Wix addresses
+RedirectMatch 301 ^/copy-of-inflation-facility-1(\.html)?$ /invisalign
+RedirectMatch 301 ^/copy-of-ot(\.html)?$ /clinic-gallery
+RedirectMatch 301 ^/copy-of-surgical-icu(\.html)?$ /clinic-gallery
+RedirectMatch 301 ^/copy-of-inflation-facility(\.html)?$ /clinic-gallery
+RedirectMatch 301 ^/copy-of-digital-radiography(\.html)?$ /clinic-gallery
+RedirectMatch 301 ^/copy-of-services(\.html)?$ /treatments
+RedirectMatch 301 ^/events-page(\.html)?$ /
+RedirectMatch 301 ^/services(\.html)?$ /treatments
+RedirectMatch 301 ^/gallery(\.html)?$ /smile-gallery
+RedirectMatch 301 ^/book-online(\.html)?$ /appointment
+RedirectMatch 301 ^/service-page/.*(\.html)?$ /treatments
+RedirectMatch 301 ^/booking-calendar/.*(\.html)?$ /appointment
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType text/css "access plus 1 month"
+ExpiresByType application/javascript "access plus 1 month"
+ExpiresByType font/woff2 "access plus 1 year"
+ExpiresByType image/jpeg "access plus 1 month"
+ExpiresByType image/png "access plus 1 month"
+ExpiresByType video/mp4 "access plus 1 month"
+</IfModule>

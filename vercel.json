@@ -1,0 +1,66 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/copy-of-inflation-facility-1",
+      "destination": "/invisalign",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-ot",
+      "destination": "/clinic-gallery",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-surgical-icu",
+      "destination": "/clinic-gallery",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-inflation-facility",
+      "destination": "/clinic-gallery",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-digital-radiography",
+      "destination": "/clinic-gallery",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-services",
+      "destination": "/treatments",
+      "permanent": true
+    },
+    {
+      "source": "/events-page",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/services",
+      "destination": "/treatments",
+      "permanent": true
+    },
+    {
+      "source": "/gallery",
+      "destination": "/smile-gallery",
+      "permanent": true
+    },
+    {
+      "source": "/book-online",
+      "destination": "/appointment",
+      "permanent": true
+    },
+    {
+      "source": "/service-page/:path*",
+      "destination": "/treatments",
+      "permanent": true
+    },
+    {
+      "source": "/booking-calendar/:path*",
+      "destination": "/appointment",
+      "permanent": true
+    }
+  ]
+}
